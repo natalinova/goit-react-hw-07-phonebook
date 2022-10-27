@@ -1,7 +1,7 @@
 import * as api from "../api/fetchContacts";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { getAllContacts } from "./selectors";
+// import { useSelector } from "react-redux";
+// import { getAllContacts } from "./selectors";
 
 export const fetchContacts = createAsyncThunk(
     "contacts/fetch",
@@ -17,11 +17,11 @@ export const fetchContacts = createAsyncThunk(
     }
 );
 
-const isDuplicate = (name, number, contactList) => {
+// const isDuplicate = (name, number, contactList) => {
        
-        const result = contactList.find(contact => contact.name === name && contact.number === number);
-        return result;
-    };
+//         const result = contactList.find(contact => contact.name === name && contact.number === number);
+//         return result;
+//     };
 export const addContact = createAsyncThunk(
     "contacts/add",
     async(data, {rejectWithValue}) => {
