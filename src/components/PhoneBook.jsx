@@ -8,14 +8,14 @@ import { getFilteredPeople, getState } from 'redux/selectors';
 import { useEffect } from "react";
 
 export default function Phonebook() {
-  const contacts = useSelector(getFilteredPeople)
-  console.log(contacts)
+  // const contacts = useSelector(getFilteredPeople)
+  // console.log(contacts)
   const { loading, error } = useSelector(getState);
   console.log(error)
- const  dispatch = useDispatch();
-   useEffect(() => {
-        dispatch(fetchContacts(), [dispatch]) 
-    })
+//  const  dispatch = useDispatch();
+//    useEffect(() => {
+//         dispatch(fetchContacts(), [dispatch]) 
+//     })
 
    return (
       <Block>
@@ -24,7 +24,12 @@ export default function Phonebook() {
         <h2>Contacts</h2>
        <PhonebookFilter />
        {loading && <div> Loading...</div>}
-       {!loading && contacts.length > 0 && <PhonebookList contactsList={contacts} />}
+       {/* {!loading && contacts.length > 0 && */}
+         
+         <PhonebookList
+        //  contactsList={contacts}
+       />
+       {/* } */}
        {error && <div>No any people for your query</div>}
        
       </Block>
