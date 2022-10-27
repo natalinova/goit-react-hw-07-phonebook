@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { addContacts } from "redux/contactsSlice";
+import { addContact } from "redux/operations";
 import { nanoid } from "nanoid";
 import { FormTotal, InputField, InputButton } from './PhonebookStyled'
-import { getContacts } from "redux/selectors";
+import { getAllContacts } from "redux/selectors";
 
 export default function PhonebookForm() {
     const dispatch = useDispatch();
-    const contactList = useSelector(getContacts);
+    const contactList = useSelector(getAllContacts);
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
     
@@ -35,10 +35,11 @@ export default function PhonebookForm() {
             name: name,
             number:number
         }
+        console.log(newContact)
         if (isDuplicate(name, number)) {
             return alert (`There are ${name} in phonebook`)
         }
-        dispatch(addContacts(newContact))
+        dispatch(addContact(newContact))
         setName('');
         setNumber('');
     }
