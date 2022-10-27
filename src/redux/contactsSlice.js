@@ -8,25 +8,25 @@ import { fetchContacts, addContact } from './operations';
          loading: false,
          error: null
      },
-     ExtraReducers:
+     extraReducers:
          {
              [fetchContacts.pending] (state) {
-            state.contacts.loading = true;
+            state.loading = true;
         },
          [fetchContacts.fulfilled] (state, action) {
              console.log(state);
-            state.contacts.loading = false;
-            state.contacts.contacts = action.payload;
+            state.loading = false;
+            state.contacts = action.payload;
         },
         [fetchContacts.rejected] (state, action) {
-            state.contacts.loading = false;
-            state.contacts.error = action.payload;
+            state.loading = false;
+            state.error = action.payload;
          },
         [addContact.pending] (state) {
-            state.contacts.loading = true;
+            state.loading = true;
         },
         [addContact.fulfilled] (state, {payload}) {
-            state.contacts.loading = false;
+            state.loading = false;
             state.contacts.push(payload)
         },
         [addContact.rejected] (state, {payload}) {
