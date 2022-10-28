@@ -4,35 +4,19 @@ import { ListItem, Button, Row } from './PhonebookStyled'
 import {  removeContact } from 'redux/operations';
 import { fetchContacts } from "redux/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { getFilter, getState,getAllContacts } from 'redux/selectors';
+import { getFilteredPeople, getFilter, getAllContacts } from 'redux/selectors';
 import { useEffect } from "react";
+import { Message } from './PhonebookStyled';
 
 export default function PhonebookList() {
 
-   const stateFilter = useSelector(getFilter);
+    const stateFilter = useSelector(getFilter);
     const contactsList = useSelector(getAllContacts);
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchContacts(),
-        // eslint-disable-next-line    
-            [dispatch]) 
-    })
+    const dispatch = useDispatch();
 
-    const getFilteredPeople = () => {
-    if (!stateFilter) {
-            return contactsList
-        };
-        const normalizedFilter = stateFilter.toLocaleLowerCase();
-        const filteredPeople = contactsList.filter(({ name, number }) => {
-            const normalizedName = name.toLocaleLowerCase();
-            const normalizedNumber = number.toLocaleLowerCase();
-            const result = normalizedName.includes(normalizedFilter) || normalizedNumber.includes(normalizedFilter);
-            return result;
-        })
-    return filteredPeople;
-  };
-    
-    const people = getFilteredPeople();
+    useEffect(() => { dispatch(fetchContacts()) }, [dispatch]);
+
+    const people = getFilteredPeople(contactsList, stateFilter);
 
     const list = people.map(({ id, name, number }) => {
         return <ListItem key={id}>
@@ -43,8 +27,10 @@ export default function PhonebookList() {
     })
 
     return (
+        <>
+         <ul>{list}</ul>
+        {people.length === 0 && <Message>No any people for your query</Message>}
+        </>
        
-             <ul>{list}</ul>
-    
-        )
+    )
 }

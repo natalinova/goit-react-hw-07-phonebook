@@ -4,6 +4,9 @@ import { addContact } from "redux/operations";
 import { nanoid } from "nanoid";
 import { FormTotal, InputField, InputButton } from './PhonebookStyled'
 import { getAllContacts } from "redux/selectors";
+import Toastify from 'toastify-js';
+import '../css/toastify.css';
+
 
 export default function PhonebookForm() {
     const dispatch = useDispatch();
@@ -35,10 +38,16 @@ export default function PhonebookForm() {
             name: name,
             number:number
         }
-        console.log(newContact)
+
         if (isDuplicate(name, number)) {
-            return alert (`There are ${name} in phonebook`)
+            return Toastify({
+                text: `There are ${name} in phonebook`,
+                gravity: "bottom",
+                position: 'center',
+                stopOnFocus: true,
+            }).showToast();
         }
+
         dispatch(addContact(newContact))
         setName('');
         setNumber('');
