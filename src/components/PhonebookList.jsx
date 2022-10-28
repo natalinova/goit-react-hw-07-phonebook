@@ -29,7 +29,7 @@ export default function PhonebookList() {
     return (
         <>
          <ul>{list}</ul>
-        {people.length === 0 && <Message>No any people for your query</Message>}
+        {people.length === 0 && stateFilter && <Message>No any people for your query</Message>}
         </>
        
     )
